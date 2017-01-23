@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 const morgan = require('morgan');
 const jsonParser=require('body-parser').json();
+const bodyParser = require('body-parser');
+
 
 const {blogPost} = require('./models');
 
+const app = express();
+app.use(bodyParser.json());
 
 // GET REQUEST
 app.get('/blogPost', (req, res) => {
