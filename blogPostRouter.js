@@ -1,5 +1,19 @@
-// add cont && requires
+const express = require('express');
+const router = express.Router();
+const morgan = require('morgan');
+const jsonParser=require('body-parser').json();
 
+const {blogPosts} = require('./models');
+app.use(bodyParser.json());
+
+
+// EXISITING BLOG POSTS
+
+blogPosts.create('First Post', 'This is my first post', 'Aleah Manzi', '1/10/17');
+blogPosts.create('Second Post', 'This is my second post', 'Aleah Manzi', '1/12/17');
+blogPosts.create('Third Post', 'This is my third post', 'Aleah Manzi', '1/15/17');
+blogPosts.create('Fourth Post', 'This is my fourth post', 'Aleah Manzi', '1/20/17');
+blogPosts.create('Fifth Post', 'This is my fifth post', 'Aleah Manzi', '1/25/17');
 
 // GET REQUEST
 app.get('/blogPost', (req, res) => {

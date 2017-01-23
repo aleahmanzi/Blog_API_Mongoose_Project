@@ -6,11 +6,12 @@ const blogPostRouter = requre('./blogPostRouter')
 mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config');
-const {Restaurant} = require('./models');
+const {blogPost} = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
 
+mongoose.Promise = global.Promise;
 
 let server;
 
