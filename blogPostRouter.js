@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const jsonParser=require('body-parser').json();
 
 const {blogPost} = require('./models');
-app.use(bodyParser.json());
 
 
 // GET REQUEST

@@ -9,6 +9,7 @@ const {PORT, DATABASE_URL} = require('./config');
 const {blogPost} = require('./models');
 
 const app = express();
+const jsonParser = bodyParser.json();
 app.use(bodyParser.json());
 
 let server;
