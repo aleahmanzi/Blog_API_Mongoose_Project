@@ -10,7 +10,7 @@ const blogSchema = mongoose.blogSchema({
 	created: {type: Date, default: Date.now}
 });
 
-blogPostSchema.methods.apiRepr = function() {
+blogSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     author: this.authorName,
@@ -22,3 +22,5 @@ blogPostSchema.methods.apiRepr = function() {
 
 
 const blogPost = mongoose.model('blogPost', blogSchema);
+
+module.exports = {blogPost};
