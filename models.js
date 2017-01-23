@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema();
 
-const blogSchema = mongoose.blogSchema({
+const blogSchema = new Schema({
 	author: {
 		firstName: String, 
 		lastName: String
