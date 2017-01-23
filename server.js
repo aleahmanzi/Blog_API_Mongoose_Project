@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const blogPostRouter = requre('./blogPostRouter')
+const blogPostRouter = require('./blogPostRouter')
 
 mongoose.Promise = global.Promise;
 
@@ -10,8 +10,6 @@ const {blogPost} = require('./models');
 
 const app = express();
 app.use(bodyParser.json());
-
-mongoose.Promise = global.Promise;
 
 let server;
 
