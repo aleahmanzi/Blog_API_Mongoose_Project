@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const blogPostRouter = require('./blogPostRouter')
+const blogPostRouter = require('./blogPostRouter');
 
 mongoose.Promise = global.Promise;
 
@@ -10,7 +10,25 @@ const {blogPost} = require('./models');
 
 const app = express();
 const jsonParser = bodyParser.json();
+
+//// BEGIN OPTIONS ////
 app.use(bodyParser.json());
+
+app.use(function (req, res, next) {
+  console.log("--NEW REQUEST--");
+  console.log(req.method, " ", req.path);
+  next();
+  req.body.hello = "HELLO";
+  console.log("body at app level ", req.body);
+});
+let userRouter = require('./userRouter');
+console.log("user router ", userRouter);
+/// routes for "Router"
+app.use('/blogPost', blogPostRouter);
+app.use('/user', userRouter);
+
+
+///// END OPTIONS /////
 
 let server;
 
@@ -53,6 +71,6 @@ function closeServer() {
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));
-};
+}
 
 module.exports = {app, runServer, closeServer};

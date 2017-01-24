@@ -1,17 +1,13 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const morgan = require('morgan');
-const jsonParser=require('body-parser').json();
-const bodyParser = require('body-parser');
-
 
 const {blogPost} = require('./models');
 
-const app = express();
-app.use(bodyParser.json());
-
+router.use(function(req, res) {
+  console.log("---- in the blog post router ----");
+});
 // GET REQUEST
-app.get('/blogPost', (req, res) => {
+router.get('/', (req, res) => {
   blogPost
     .find()
     .limit(10)
@@ -30,7 +26,7 @@ app.get('/blogPost', (req, res) => {
 });
 
 // POST REQUEST
-app.post('/blogPost', (req, res) => {
+router.post('/', (req, res) => {
 
   const requiredFields = ['title', 'content'];
   requiredFields.forEach(field => {
@@ -55,7 +51,7 @@ app.post('/blogPost', (req, res) => {
 
 
 // PUT REQUEST
-app.put('/blogPost/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +
@@ -83,7 +79,7 @@ app.put('/blogPost/:id', (req, res) => {
 
 
 // DELET REQUEST
-app.delete('/blogPost/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   blogPost
     .findByIdAndRemove(req.params.id)
     .exec()
@@ -91,6 +87,8 @@ app.delete('/blogPost/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-app.use('*', function(req, res) {
+router.use('*', function(req, res) {
   res.status(404).json({message: 'Not Found'});
 });
+
+module.exports = router;
